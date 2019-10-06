@@ -6,6 +6,7 @@ import {
     fetchAndCacheNetflixMembers,
     fetchAndCacheNetflixBaseUrl
 } from './utils/fetch-cache-github-data'
+import customNetflixRoutes from './route'
 
 const app = express()
 app.disable('x-powered-by')
@@ -15,6 +16,9 @@ app.use(morgan('tiny'))
 
 // Get the port from process variable or use default one
 const PORT = process.env.PORT || 2000
+
+// Setting custom routers
+app.use('/', customNetflixRoutes)
 
 /**
  * Starts express server

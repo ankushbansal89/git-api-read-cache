@@ -1,14 +1,15 @@
 import fetch from 'node-fetch'
 import parse from 'parse-link-header'
 import { setCache } from './cache'
+import { CACHE_KEYS } from '../constants'
 
-const GITHUB_BASE_URL = 'https://api.github.com'
+export const GITHUB_BASE_URL = 'https://api.github.com'
 
 /**
  * Gets data from github base url and caches it
  */
 export async function fetchAndCacheGithubBaseUrl() {
-    const key = 'baseUrl'
+    const key = CACHE_KEYS.GITHUB_BASE_URL
     try {
         await fetchAndCacheData({
             url: GITHUB_BASE_URL,
@@ -23,7 +24,7 @@ export async function fetchAndCacheGithubBaseUrl() {
  * Gets data from netflix base url
  */
 export async function fetchAndCacheNetflixBaseUrl() {
-    const key = 'netflix'
+    const key = CACHE_KEYS.NETFLIX_BASE_URL
     const url = `${GITHUB_BASE_URL}/orgs/Netflix`
     try {
         await fetchAndCacheData({
@@ -39,7 +40,7 @@ export async function fetchAndCacheNetflixBaseUrl() {
  * Gets netflix members list from github api and caches it
  */
 export async function fetchAndCacheNetflixMembers() {
-    const key = 'members'
+    const key = CACHE_KEYS.NETLIX_MEMBERS
     const url = `${GITHUB_BASE_URL}/orgs/Netflix/members?per_page=100`
     try {
         await fetchAndCacheData({
@@ -56,7 +57,7 @@ export async function fetchAndCacheNetflixMembers() {
  * Gets netflix repos list from github api and caches it
  */
 export async function fetchAndCacheNetflixRepos() {
-    const key = 'repos'
+    const key = CACHE_KEYS.NETLIX_REPOS
     const url = `${GITHUB_BASE_URL}/orgs/Netflix/repos?per_page=100`
     try {
         await fetchAndCacheData({
@@ -66,6 +67,28 @@ export async function fetchAndCacheNetflixRepos() {
         })
     } catch (e) {
         throw new Error('Error fetching and caching github base url', e)
+    }
+}
+
+/**
+ * Returns the data from github api
+ * @param {String} url url to fetch data
+ * @returns object containing data and response
+ */
+export async function fetchData(url) {
+    if (!url) {
+        throw new Error('url is not defined')
+    }
+    try {
+        const header = getRequestHeader()
+        const response = await fetch(`${url}`, header)
+        const data = await response.json()
+        return {
+            data,
+            response
+        }
+    } catch (e) {
+        throw new Error(`Unable to fetch the response from ${url} url`)
     }
 }
 
@@ -94,29 +117,7 @@ async function fetchAndCacheData({ url, key, isPagination = false }) {
 }
 
 /**
- * Returns the data from github api
- * @param {String} url url to fetch data
- * @returns object containing data and response
- */
-async function fetchData(url) {
-    if (!url) {
-        throw new Error('url is not defined')
-    }
-    try {
-        const header = getRequestHeader()
-        const response = await fetch(`${url}`, header)
-        const data = await response.json()
-        return {
-            data,
-            response
-        }
-    } catch (e) {
-        throw new Error(`Unable to fetch the response from ${url} url`)
-    }
-}
-
-/**
- * Returns the data from github api's which support pagination
+ * Returns the data from github apis which support pagination
  * @param {String} url url to fetch data
  * @returns object with data
  */

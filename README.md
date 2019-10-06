@@ -24,19 +24,20 @@ npm run dev
 ## Requirements
 * [x] Setup a server
 * [x] Cache data from / github endpoint
-* [ ] Cache data from /orgs/Netflix github endpoint
-* [ ] Cache data from /orgs/Netflix/members
+* [x] Cache data from /orgs/Netflix github endpoint
+* [x] Cache data from /orgs/Netflix/members
 * [x] Cache data from /orgs/Netflix/repos github endpoint
-* [ ] Provide custom view for top n repos by number of forks - /view/top/n/forks
-* [ ] Provide custom view for top n repos by number of last_updated - /view/top/n/last_updated
-* [ ] Provide custom view for top n repos by number of stars - /view/top/n/stars
-* [ ] Provide custom view for top n repos by number of open_issues - /view/top/n/open_issues
-* [ ] Response of custom views should be in descending order of the criteria
-* [ ] Response of custom views should be a list of list - [['Netflix/<repo_name>', <criteria value>]]
+* [x] Provide custom view for top n repos by number of forks - /view/top/n/forks
+* [x] Provide custom view for top n repos by number of last_updated - /view/top/n/last_updated
+* [x] Provide custom view for top n repos by number of stars - /view/top/n/stars
+* [x] Provide custom view for top n repos by number of open_issues - /view/top/n/open_issues
+* [x] Response of custom views should be in descending order of the criteria
+* [x] Response of custom views should be a list of list - [['Netflix/<repo_name>', <criteria value>]]
+* [x] Except for custom endpoint, create proxy for all other routes
 * [ ] Provide README.md with building, running & testing instruction
-* [ ] Use a GITHUB_API_TOKEN to overcome github's rate limit restrictions
+* [x] Use a GITHUB_API_TOKEN to overcome github's rate limit restrictions
 * [ ] Provide a /healthcheck endpoint that returns HTTP 200 when the service is ready to serve API responses.
-* [ ] Port number can be passed at the start of the server
+* [x] Port number can be passed at the start of the server
 * [ ] Cache should be periodically updated
 
 ## Technology Used
