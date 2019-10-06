@@ -20,6 +20,39 @@ export async function fetchAndCacheGithubBaseUrl() {
 }
 
 /**
+ * Gets data from netflix base url
+ */
+export async function fetchAndCacheNetflixBaseUrl() {
+    const key = 'netflix'
+    const url = `${GITHUB_BASE_URL}/orgs/Netflix`
+    try {
+        await fetchAndCacheData({
+            url,
+            key
+        })
+    } catch (e) {
+        throw new Error('Error fetching and caching github base url', e)
+    }
+}
+
+/**
+ * Gets netflix members list from github api and caches it
+ */
+export async function fetchAndCacheNetflixMembers() {
+    const key = 'members'
+    const url = `${GITHUB_BASE_URL}/orgs/Netflix/members?per_page=100`
+    try {
+        await fetchAndCacheData({
+            url,
+            key,
+            isPagination: true
+        })
+    } catch (e) {
+        throw new Error('Error fetching and caching github base url', e)
+    }
+}
+
+/**
  * Gets netflix repos list from github api and caches it
  */
 export async function fetchAndCacheNetflixRepos() {
@@ -65,7 +98,7 @@ async function fetchAndCacheData({ url, key, isPagination = false }) {
  * @param {String} url url to fetch data
  * @returns object containing data and response
  */
-export async function fetchData(url) {
+async function fetchData(url) {
     if (!url) {
         throw new Error('url is not defined')
     }

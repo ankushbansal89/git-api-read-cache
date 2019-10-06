@@ -2,7 +2,9 @@ import express from 'express'
 import morgan from 'morgan'
 import {
     fetchAndCacheGithubBaseUrl,
-    fetchAndCacheNetflixRepos
+    fetchAndCacheNetflixRepos,
+    fetchAndCacheNetflixMembers,
+    fetchAndCacheNetflixBaseUrl
 } from './utils/fetch-cache-github-data'
 
 const app = express()
@@ -21,6 +23,8 @@ export default async function startServer() {
     try {
         await Promise.all([
             fetchAndCacheGithubBaseUrl(),
+            fetchAndCacheNetflixBaseUrl(),
+            fetchAndCacheNetflixMembers(),
             fetchAndCacheNetflixRepos()
         ])
         app.listen(PORT, () => {
