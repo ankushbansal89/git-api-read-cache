@@ -1,5 +1,9 @@
 import express from 'express'
 import morgan from 'morgan'
+import {
+    fetchAndCacheGithubBaseUrl,
+    fetchAndCacheNetflixRepos
+} from './utils/fetch-cache-github-data'
 
 const app = express()
 app.disable('x-powered-by')
@@ -13,12 +17,16 @@ const PORT = process.env.PORT || 2000
 /**
  * Starts express server
  */
-export default function startServer() {
-  try {
-    app.listen(PORT, () => {
-      console.log(`Server is running on port ${PORT}`)
-    })
-  } catch (e) {
-    console.log(e)
-  }
+export default async function startServer() {
+    try {
+        await Promise.all([
+            fetchAndCacheGithubBaseUrl(),
+            fetchAndCacheNetflixRepos()
+        ])
+        app.listen(PORT, () => {
+            console.log(`Server is running on port ${PORT}`)
+        })
+    } catch (e) {
+        console.log(e)
+    }
 }

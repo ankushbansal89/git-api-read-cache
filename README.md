@@ -23,10 +23,10 @@ npm run dev
 
 ## Requirements
 * [x] Setup a server
-* [ ] Cache data from / github endpoint
+* [x] Cache data from / github endpoint
 * [ ] Cache data from /orgs/Netflix github endpoint
 * [ ] Cache data from /orgs/Netflix/members
-* [ ] Cache data from /orgs/Netflix/repos github endpoint
+* [x] Cache data from /orgs/Netflix/repos github endpoint
 * [ ] Provide custom view for top n repos by number of forks - /view/top/n/forks
 * [ ] Provide custom view for top n repos by number of last_updated - /view/top/n/last_updated
 * [ ] Provide custom view for top n repos by number of stars - /view/top/n/stars

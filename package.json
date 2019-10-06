@@ -7,7 +7,8 @@
     "start": "node dist/index.js $PORT",
     "dev": "nodemon --exec npm restart",
     "restart": "rimraf dist && npm run build && npm start",
-    "build": "babel src --out-dir dist --source-maps"
+    "build": "babel src --out-dir dist --source-maps",
+    "test": "./node_modules/jest/bin/jest.js --watch"
   },
   "repository": {
     "type": "git",
@@ -26,7 +27,9 @@
   "homepage": "https://github.com/ankushbansal89/git-api-read-cache#readme",
   "dependencies": {
     "express": "^4.17.1",
-    "morgan": "^1.9.1"
+    "morgan": "^1.9.1",
+    "node-fetch": "^2.6.0",
+    "parse-link-header": "^1.0.1"
   },
   "devDependencies": {
     "@babel/cli": "^7.6.2",
