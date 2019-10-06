@@ -1,13 +1,7 @@
 import express from 'express'
 import morgan from 'morgan'
-import {
-    fetchAndCacheGithubBaseUrl,
-    fetchAndCacheNetflixRepos,
-    fetchAndCacheNetflixMembers,
-    fetchAndCacheNetflixBaseUrl
-} from './utils/fetch-cache-github-data'
 import customNetflixRoutes from './route'
-import { setHealthInCache } from './utils/health-check'
+import { scheduleCacheUpdate } from './utils/cron'
 
 const app = express()
 app.disable('x-powered-by')
@@ -26,17 +20,11 @@ app.use('/', customNetflixRoutes)
  */
 export default async function startServer() {
     try {
-        await Promise.all([
-            fetchAndCacheGithubBaseUrl(),
-            fetchAndCacheNetflixBaseUrl(),
-            fetchAndCacheNetflixMembers(),
-            fetchAndCacheNetflixRepos()
-        ])
+        await scheduleCacheUpdate()
         app.listen(PORT, () => {
             console.log(`Server is running on port ${PORT}`)
         })
-        setHealthInCache(true)
     } catch (e) {
-        console.log(e)
+        console.log('Error happened while starting the server', e)
     }
 }

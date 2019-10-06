@@ -38,7 +38,7 @@ npm run dev
 * [x] Use a GITHUB_API_TOKEN to overcome github's rate limit restrictions
 * [x] Provide a /healthcheck endpoint that returns HTTP 200 when the service is ready to serve API responses.
 * [x] Port number can be passed at the start of the server
-* [ ] Cache should be periodically updated
+* [x] Cache should be periodically updated
 
 ## Technology Used
 * Node
