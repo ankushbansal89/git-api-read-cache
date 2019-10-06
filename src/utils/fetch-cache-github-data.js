@@ -1,15 +1,13 @@
 import fetch from 'node-fetch'
 import parse from 'parse-link-header'
 import { setCache } from './cache'
-import { CACHE_KEYS } from '../constants'
-
-export const GITHUB_BASE_URL = 'https://api.github.com'
+import { CACHE_KEYS, GITHUB_BASE_URL } from '../constants'
 
 /**
  * Gets data from github base url and caches it
  */
 export async function fetchAndCacheGithubBaseUrl() {
-    const key = CACHE_KEYS.GITHUB_BASE_URL
+    const key = CACHE_KEYS.GITHUB_BASE_URL_KEY
     try {
         await fetchAndCacheData({
             url: GITHUB_BASE_URL,
@@ -24,7 +22,7 @@ export async function fetchAndCacheGithubBaseUrl() {
  * Gets data from netflix base url
  */
 export async function fetchAndCacheNetflixBaseUrl() {
-    const key = CACHE_KEYS.NETFLIX_BASE_URL
+    const key = CACHE_KEYS.NETFLIX_BASE_URL_KEY
     const url = `${GITHUB_BASE_URL}/orgs/Netflix`
     try {
         await fetchAndCacheData({
@@ -40,7 +38,7 @@ export async function fetchAndCacheNetflixBaseUrl() {
  * Gets netflix members list from github api and caches it
  */
 export async function fetchAndCacheNetflixMembers() {
-    const key = CACHE_KEYS.NETLIX_MEMBERS
+    const key = CACHE_KEYS.NETLIX_MEMBERS_KEY
     const url = `${GITHUB_BASE_URL}/orgs/Netflix/members?per_page=100`
     try {
         await fetchAndCacheData({
@@ -57,7 +55,7 @@ export async function fetchAndCacheNetflixMembers() {
  * Gets netflix repos list from github api and caches it
  */
 export async function fetchAndCacheNetflixRepos() {
-    const key = CACHE_KEYS.NETLIX_REPOS
+    const key = CACHE_KEYS.NETLIX_REPOS_KEY
     const url = `${GITHUB_BASE_URL}/orgs/Netflix/repos?per_page=100`
     try {
         await fetchAndCacheData({

@@ -9,7 +9,8 @@ import {
     getNetflixBaseUrlFromCache,
     getNetflixMembersFromCache,
     getNetflixReposFromCache
-} from './utils/customEndpoints'
+} from './utils/custom-endpoints'
+import { performHealthCheck } from './utils/health-check'
 
 const customNetflixRoutes = Router()
 
@@ -21,6 +22,7 @@ customNetflixRoutes.get('/', getGithubBaseUrlFromCache)
 customNetflixRoutes.get('orgs/Netflix', getNetflixBaseUrlFromCache)
 customNetflixRoutes.get('/orgs/Netflix/members', getNetflixMembersFromCache)
 customNetflixRoutes.get('/orgs/Netflix/repos', getNetflixReposFromCache)
+customNetflixRoutes.get('/healthcheck', performHealthCheck)
 customNetflixRoutes.get('*', proxy)
 
 export default customNetflixRoutes

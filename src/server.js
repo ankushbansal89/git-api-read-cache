@@ -7,6 +7,7 @@ import {
     fetchAndCacheNetflixBaseUrl
 } from './utils/fetch-cache-github-data'
 import customNetflixRoutes from './route'
+import { setHealthInCache } from './utils/health-check'
 
 const app = express()
 app.disable('x-powered-by')
@@ -34,6 +35,7 @@ export default async function startServer() {
         app.listen(PORT, () => {
             console.log(`Server is running on port ${PORT}`)
         })
+        setHealthInCache(true)
     } catch (e) {
         console.log(e)
     }

@@ -1,8 +1,8 @@
 import { getCache } from './cache'
-import { fetchData, GITHUB_BASE_URL } from './fetch-cache-github-data'
-import { CACHE_KEYS } from '../constants'
+import { fetchData } from './fetch-cache-github-data'
+import { CACHE_KEYS, GITHUB_BASE_URL } from '../constants'
 
-const netflixReposKey = CACHE_KEYS.NETLIX_REPOS
+const netflixReposKey = CACHE_KEYS.NETLIX_REPOS_KEY
 
 /**
  * Send a response with top n repos based on forks
@@ -114,7 +114,7 @@ export async function proxy({ url }, res) {
  * @param {*} res
  */
 export function getGithubBaseUrlFromCache(req, res) {
-    const key = CACHE_KEYS.GITHUB_BASE_URL
+    const key = CACHE_KEYS.GITHUB_BASE_URL_KEY
     const cachedData = getCache(key)
     if (cachedData) {
         res.send(cachedData)
@@ -131,7 +131,7 @@ export function getGithubBaseUrlFromCache(req, res) {
  * @param {*} res
  */
 export function getNetflixBaseUrlFromCache(req, res) {
-    const key = CACHE_KEYS.NETFLIX_BASE_URL
+    const key = CACHE_KEYS.NETFLIX_BASE_URL_KEY
     const cachedData = getCache(key)
     if (cachedData) {
         res.send(cachedData)
@@ -148,7 +148,7 @@ export function getNetflixBaseUrlFromCache(req, res) {
  * @param {*} res
  */
 export function getNetflixMembersFromCache(req, res) {
-    const key = CACHE_KEYS.NETLIX_MEMBERS
+    const key = CACHE_KEYS.NETLIX_MEMBERS_KEY
     const cachedData = getCache(key)
     if (cachedData) {
         res.send(cachedData)
@@ -165,7 +165,7 @@ export function getNetflixMembersFromCache(req, res) {
  * @param {*} res
  */
 export function getNetflixReposFromCache(req, res) {
-    const key = CACHE_KEYS.NETLIX_REPOS
+    const key = CACHE_KEYS.NETLIX_REPOS_KEY
     const cachedData = getCache(key)
     if (cachedData) {
         res.send(cachedData)
