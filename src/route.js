@@ -23,6 +23,8 @@ customNetflixRoutes.get('orgs/Netflix', getNetflixBaseUrlFromCache)
 customNetflixRoutes.get('/orgs/Netflix/members', getNetflixMembersFromCache)
 customNetflixRoutes.get('/orgs/Netflix/repos', getNetflixReposFromCache)
 customNetflixRoutes.get('/healthcheck', performHealthCheck)
+// If these routes are called from browser, then browser requests for favicon.ico resource which
+customNetflixRoutes.get('/favicon.ico', (req, res) => res.status(204))
 customNetflixRoutes.get('*', proxy)
 
 export default customNetflixRoutes
