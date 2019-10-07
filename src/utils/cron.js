@@ -15,7 +15,7 @@ import {
 export async function scheduleCacheUpdate() {
     try {
         await updateCache()
-        cron.schedule('* */1 * * *', updateCache)
+        cron.schedule('0 */1 * * *', updateCache)
     } catch (e) {
         throw new Error(e)
     }
