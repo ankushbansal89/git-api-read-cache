@@ -20,10 +20,14 @@ app.use('/', customNetflixRoutes)
  */
 export default async function startServer() {
     try {
-        await scheduleCacheUpdate()
-        app.listen(PORT, () => {
-            console.log(`Server is running on port ${PORT}`)
-        })
+        if (process.env.GITHUB_API_TOKEN) {
+            await scheduleCacheUpdate()
+            app.listen(PORT, () => {
+                console.log(`Server is running on port ${PORT}`)
+            })
+        } else {
+            console.log('GITHUB_API_TOKEN is not passed')
+        }
     } catch (e) {
         console.log('Error happened while starting the server', e)
     }

@@ -79,7 +79,7 @@ export async function fetchData(url) {
     }
     try {
         const header = getRequestHeader()
-        const response = await fetch(`${url}`, header)
+        const response = await fetch(url, header)
         const data = await response.json()
         return {
             data,
@@ -149,9 +149,7 @@ async function fetchDataWithPagination(url) {
  * @param {String} GITHUB_API_TOKEN github outh token
  * @returns headers object with authorization token
  */
-function getRequestHeader(
-    GITHUB_API_TOKEN = '2ab5851492d65af35b92b4c69aa6653167cfd070'
-) {
+function getRequestHeader(GITHUB_API_TOKEN = process.env.GITHUB_API_TOKEN) {
     return {
         headers: {
             Authorization: `Token ${GITHUB_API_TOKEN}`

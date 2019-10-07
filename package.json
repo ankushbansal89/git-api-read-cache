@@ -4,8 +4,8 @@
   "description": "A node express server to cache and serve custom views for Github Apis",
   "main": "index.js",
   "scripts": {
-    "start": "node dist/index.js $PORT",
-    "dev": "nodemon --exec npm restart",
+    "start": "node dist/index.js $PORT $GITHUB_API_TOKEN",
+    "dev": "nodemon --exec npm restart $PORT $GITHUB_API_TOKEN",
     "restart": "rimraf dist && npm run build && npm start",
     "build": "babel src --out-dir dist --source-maps",
     "test": "./node_modules/jest/bin/jest.js --watch"
